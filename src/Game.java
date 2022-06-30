@@ -27,8 +27,9 @@ public class Game {
     public static String statusMessage = "";
     public static int previewChip;
     public static Date startDate;
-    public static String timer;
+    public static String timer = "";
     private static boolean timerStop;
+    private static boolean timerHour = false;
     private static int filledColumns = 0;
     public static String playerName1;
     public static String playerName2;
@@ -51,15 +52,23 @@ public class Game {
         }
 
         startDate = new Date();
+        timerHour = false;
         timerStop = false;
     }
 
     public static String getTimer() {
 
         if (!timerStop) {
-            SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+            if(timer.equals("59:59")) {
+                timerHour = true;
+            }
+            SimpleDateFormat sdf;
             Date now = new Date();
-            sdf.format(new Date(now.getTime() - startDate.getTime()));
+            if (timerHour == true) {
+                sdf = new SimpleDateFormat("hh:mm:ss");
+            } else {
+                sdf = new SimpleDateFormat("mm:ss");
+            }
             timer = sdf.format(new Date(now.getTime() - startDate.getTime()));
         }
         return timer;

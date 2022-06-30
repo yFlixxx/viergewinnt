@@ -111,7 +111,11 @@ public class UserInterface {
                     Game.setPreviewedColumn(-1);
                     return;
                 } else {
-                    if(currentPoint.getX() > 120 && currentPoint.getX() < 190) {
+                    if(currentPoint.getY() < 85 || currentPoint.getY() > 530) {
+                        Game.setPreviewedColumn(-1);
+                    } else if(currentPoint.getX() < 120 || currentPoint.getX() > 640) {
+                        Game.setPreviewedColumn(-1);
+                    } else if(currentPoint.getX() > 120 && currentPoint.getX() < 190) {
                         Game.setPreviewedColumn(0);
                     } else if(currentPoint.getX() > 195 && currentPoint.getX() < 265) {
                         Game.setPreviewedColumn(1);
@@ -148,6 +152,7 @@ public class UserInterface {
         playerName2Input.setVisible(false);
 
         JButton startGameButton = new JButton("Spiel starten");
+        startGameButton.setEnabled(false);
         JSlider difficultySlider = new JSlider();
 
 
@@ -160,6 +165,7 @@ public class UserInterface {
                     difficulty = 0;
                     playerName2Input.setVisible(true);
                     difficultySlider.setVisible(false);
+                    startGameButton.setEnabled(true);
                     startGameButton.setBounds(350, 400, 100, 50);
             }
         });
@@ -190,6 +196,7 @@ public class UserInterface {
 
                 difficultySlider.setVisible(true);
                 playerName2Input.setVisible(false);
+                startGameButton.setEnabled(false);
                 startGameButton.setBounds(350, 400, 100, 50);
             }
         });
@@ -205,12 +212,12 @@ public class UserInterface {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changePanel(gamepanel);
                 if(gamemode == "pvp") {
                     Game.startNewGame(playerNameInput.getText(), playerName2Input.getText());
-                } else if (gamemode == "cpu"){
+                } else if (gamemode == "cpu") {
                     Game.startNewGame(playerNameInput.getText(), "CPU");
                 }
+                changePanel(gamepanel);
             }
         });
         startGameButton.setVisible(true);

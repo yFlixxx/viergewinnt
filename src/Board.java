@@ -1,11 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.text.AttributedCharacterIterator;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.io.IOException;
+
 
 public class Board extends JComponent {
     public static final int chipDiameter = 70;
@@ -51,7 +47,7 @@ public class Board extends JComponent {
 
     private void renderTimer(Graphics2D g2D, String timer) {
         g2D.setColor(Color.white);
-        g2D.drawString(timer, 370, 35);
+        g2D.drawString(timer, 360, 35);
     }
 
     private void renderPlayer(Graphics g2D, int winner, String playerName1, String playerName2) {
